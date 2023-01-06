@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/2.css">
+  <script src="js/echarts.min.js"></script>
+  <script src="js/echarts.js"></script>
+</head>
+
+<body>
+  <div class="head">
+    <div class="logo"> <img width="50px" src="image/logo.png" alt=""></div>
+    <ul>
+      <li> <a href="index.html">首页</a> </li>
+      <li> <a href="第2部分.html">空气综合指数</a> </li>
+      <li> <a href="第3部分.html">空气质量指数</a> </li>
+      <li> <a href="第4部分.html">空气质量与生活</a> </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div id="main" style="width:800px;height:400px;">
+    </div>
+
+
+    <div class="ctxt">
+      <h3> 2022年9月 全国城市空气质量报告</h3>
+      <span>
+        2022年9月中国生态环境部发布了全国城市空气质量报告，按照城市环境空气质量综合指数评价（综合指数数值越大表明综合污染程度越重），空气质量相对较好的20位城市依次是拉萨、舟山、昆明、雅安、盐城、内江、南通、福州、张家口、黄山、贵阳、上海、台州、海口、资阳、连云港、哈尔滨、泰州、大连和成都；空气质量相对较差的20位城市依次是滨州、咸阳、临汾、太原、萍乡、唐山、平顶山、漯河、石家庄、邢台、新乡、运城、邯郸、廊坊、鹤壁、渭南、阳泉、安阳、保定、淄博。
+        2022年9月主要污染物种类包括臭氧(O3)、二氧化氮(NO2)、PM2.5和PM10；152个城市主要污染物仅为臭氧(O3)，3个城市主要污染物仅为NO2，4个城市主要污染物仅为PM2.5，5个城市主要污染物仅为PM10，阳泉市主要污染物为二氧化氮(NO2)、臭氧(O3)，周口市和安阳市主要污染物为臭氧(O3)、PM10，广安市主要污染物为PM2.5，臭氧(O3)。
+        9月PM2.5月均浓度范围为3-44ug/m³，PM10月均浓度范围在4-85ug/m³，NO2月均浓度范围在6-44ug/m³，O3-8H-90per的月均浓度范围在105-253ug/m³；9月仅乌鲁木齐市和银川市出现了沙尘天气。
+      </span>
+    </div>
+
+
+  </div>
+
+  <div class="footer">
+    Copyright @ XXXX.COM
+  </div>
+  <script>
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+      title: {
+        text: '城市环境空气质量综合指数',
+        subtext: '根据多个数据进行综合评估'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['综合评分']
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          dataView: {
+            show: true,
+            readOnly: false
+          },
+          magicType: {
+            show: true,
+            type: ['line', 'bar']
+          },
+          restore: {
+            show: true
+          },
+          saveAsImage: {
+            show: true
+          }
+        }
+      },
+      calculable: true,
+      xAxis: [{
+        type: 'category',
+        // prettier-ignore
+        data: ['阿坝州', '甘孜州', '凉山州', '雅安市', '巴中市', '广安市', '广元市', '南充市', '遂宁市', '内江市', '达州市', '资阳市']
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: '综合评分',
+        type: 'bar',
+        data: [
+          2.03, 2.03, 2.84, 3.18, 3.21, 3.40, 3.40, 3.45, 3.51, 3.75, 3.76, 3.78
+        ],
+        markPoint: {
+          data: [{
+              name: 'Max',
+              value: 3.78,
+              xAxis: 0,
+              yAxis: 183
+            },
+            {
+              name: 'Min',
+              value: 2.03,
+              xAxis: 11,
+              yAxis: 5
+            }
+          ]
+        },
+        markLine: {
+          data: [{
+              type: 'average',
+              name: 'Avg'
+            },
+            {
+              type: 'max',
+              name: 'Max'
+            },
+            {
+              type: 'min',
+              name: 'Min'
+            }
+          ]
+        }
+      }]
+    };
+
+    option && myChart.setOption(option);
+  </script>
+</body>
+
+</html>

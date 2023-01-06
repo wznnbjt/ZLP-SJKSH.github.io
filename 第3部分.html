@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/3.css">
+  <script src="js/echarts.min.js"></script>
+  <script src="js/echarts.js"></script>
+</head>
+
+<body>
+  <div class="head">
+    <div class="logo"> <img width="50px" src="image/logo.png" alt=""></div>
+    <ul>
+      <li> <a href="index.html">首页</a> </li>
+      <li> <a href="第2部分.html">空气综合指数</a> </li>
+      <li> <a href="第3部分.html">空气质量指数</a> </li>
+      <li> <a href="第4部分.html">空气质量与生活</a> </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <h3>空气质量指数</h3>
+
+    <div id="main" style="width:800px;height:400px;">
+    </div>
+
+    <div id="main2" style="width:800px;height:400px;">
+    </div>
+
+    <div class="ctxt">
+      <h3>2014年至2021年各省份、各地级市以及各县的PM2.5浓度和空气质量数据情况合集</h3>
+      <span>
+        2022年9月中国生态环境部发布了全国城市空气质量报告，按照城市环境空气质量综合指数评价（综合指数数值越大表明综合污染程度越重），空气质量相对较好的20位城市依次是拉萨、舟山、昆明、雅安、盐城、内江、南通、福州、张家口、黄山、贵阳、上海、台州、海口、资阳、连云港、哈尔滨、泰州、大连和成都；空气质量相对较差的20位城市依次是滨州、咸阳、临汾、太原、萍乡、唐山、平顶山、漯河、石家庄、邢台、新乡、运城、邯郸、廊坊、鹤壁、渭南、阳泉、安阳、保定、淄博。
+        <br><br>
+        数据整理至Washington University的Atmospheric Composition Analysis
+        Group对全球地表PM2.5浓度的测算结果，年度从2000年到2018年，主要项目包括行政区划代码，省份，年份，年均浓度(微克/立方米，人口加权)，年均浓度(微克/立方米，地理加权)，人口覆盖率%，地理覆盖率%，总人口（百万人）。
+        <br> <br>
+        年度从2000年到2018年，各项目数据匹配286地级市矢量地图后的浓度均值数据。数据的精度非常高，并且保证了统计口径的一致性，可以用作长时序分析。
+      </span>
+    </div>
+
+
+  </div>
+
+  <div class="footer">
+    Copyright @ XXXX.COM
+  </div>
+  <script>
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+      title: [{
+        text: '部分城市PM2.5浓度'
+      }],
+      polar: {
+        radius: [30, '80%']
+      },
+      radiusAxis: {
+        max: 4
+      },
+      angleAxis: {
+        type: 'category',
+        data: ['北京', '上海', '天津', '深圳', '广州', '武汉', '成都', '杭州', '西安'],
+        startAngle: 75
+      },
+      tooltip: {},
+      series: {
+        type: 'bar',
+        data: [37.5, 31.5, 48.9, 19, 22.6, 36.5, 40.5, 29, 49.3],
+        coordinateSystem: 'polar',
+        label: {
+          show: true,
+          position: 'middle',
+          formatter: '{b}: {c}'
+        }
+      },
+      animation: false
+    };
+
+    option && myChart.setOption(option);
+  </script>
+
+  <script>
+    var chartDom = document.getElementById('main2');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+      title: [{
+        text: '部分城市空气质量'
+      }],
+      dataset: {
+        source: [
+          ['amount', 'product'],
+          [37.5, '北京'],
+          [31.5, '上海'],
+          [48.9, '天津'],
+          [19, '深圳'],
+          [22.6, '广州'],
+          [36.5, '武汉'],
+          [40.5, '成都'],
+          [29, '杭州'],
+          [49.3, '西安'],
+          [31.3, '南京']
+        ]
+      },
+      grid: {
+        containLabel: true
+      },
+      xAxis: {
+        name: 'amount'
+      },
+      yAxis: {
+        type: 'category'
+      },
+      visualMap: {
+        orient: 'horizontal',
+        left: 'center',
+        min: 10,
+        max: 100,
+        text: ['High Score', 'Low Score'],
+        // Map the score column to color
+        dimension: 0,
+        inRange: {
+          color: ['#65B581', '#FFCE34', '#FD665F']
+        }
+      },
+      series: [{
+        type: 'bar',
+        encode: {
+          // Map the "amount" column to X axis.
+          x: 'amount',
+          // Map the "product" column to Y axis
+          y: 'product'
+        }
+      }]
+    };
+
+    option && myChart.setOption(option);
+  </script>
+</body>
+
+</html>
